@@ -9,7 +9,7 @@ app.get('/', (req, res) => {
   res.send(chats)
 })
 
-app.get('/chats', (req, res) => {
+app.get('/api/chats', (req, res) => {
   res.send(chats)
 })
 
