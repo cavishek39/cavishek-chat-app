@@ -1,12 +1,14 @@
 import React from 'react'
 import './App.css'
+import { Route } from 'react-router-dom'
+import { Home } from './pages/Home'
+import { Chat } from './pages/Chat'
 
 function App() {
   return (
     <div className='App'>
-      <header className='App-header'>
-        <p>Let's build the chat app and learn something new</p>
-      </header>
+      <Route path='/' component={Home} exact />
+      <Route path='/chats' component={Chat} />
     </div>
   )
 }
