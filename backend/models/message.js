@@ -9,9 +9,9 @@ const messageModel = mongoose.Schema(
     content: { type: String, trim: true },
     chat: { type: mongoose.Schema.Types.ObjectId, ref: 'Chat' },
   },
-  { timestamp: true }
+  { timestamps: true }
 )
 
-const Message = mongoose.Model('Message', messageModel)
+const Message = mongoose.model('Message', messageModel)
 
 module.exports = Message
