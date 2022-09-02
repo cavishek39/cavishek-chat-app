@@ -6,6 +6,7 @@ import { VStack } from '@chakra-ui/layout'
 import axios from 'axios'
 import { useToast } from '@chakra-ui/react'
 import { useHistory } from 'react-router-dom'
+import { CLOUD_NAME, IMAGE_UPLOAD_URL, UPLOAD_PRESET } from '../../secrets'
 
 const SignUpForm = () => {
   const [show, setShow] = useState(false)
@@ -25,6 +26,10 @@ const SignUpForm = () => {
   const onChangePassword = (e) => setPassword(e.target.value)
   const onChangeConfirmPassword = (e) => setConfirmPassword(e.target.value)
 
+  /**
+   * Triggered when user tapped on the SignUp button
+   * @returns Promise<void>
+   */
   const submitHandler = async () => {
     setPicLoading(true)
     if (!name || !email || !password || !confirmPassword) {
@@ -61,7 +66,7 @@ const SignUpForm = () => {
           name,
           email,
           password,
-          pic,
+          profileAvatar: pic,
         },
         config
       )
@@ -105,9 +110,9 @@ const SignUpForm = () => {
     if (pics.type === 'image/jpeg' || pics.type === 'image/png') {
       const data = new FormData()
       data.append('file', pics)
-      data.append('upload_preset', 'chat-app')
-      data.append('cloud_name', 'piyushproj')
-      fetch('https://api.cloudinary.com/v1_1/piyushproj/image/upload', {
+      data.append('upload_preset', UPLOAD_PRESET)
+      data.append('cloud_name', CLOUD_NAME)
+      fetch(IMAGE_UPLOAD_URL, {
         method: 'post',
         body: data,
       })

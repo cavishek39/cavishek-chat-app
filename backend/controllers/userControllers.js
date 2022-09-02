@@ -30,6 +30,7 @@ const registerUser = asyncHandler(async (req, res) => {
       profileAvatar: user.profileAvatar,
       token: generateToken(user._id),
     })
+    console.log(`${user.name} has been registered Successfully`)
   } else {
     res.status(400)
     throw new Error('Something went wrong while creating user')
