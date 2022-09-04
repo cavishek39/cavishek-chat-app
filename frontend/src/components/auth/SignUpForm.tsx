@@ -6,7 +6,7 @@ import { VStack } from '@chakra-ui/layout'
 import axios from 'axios'
 import { useToast } from '@chakra-ui/react'
 import { useHistory } from 'react-router-dom'
-import { CLOUD_NAME, IMAGE_UPLOAD_URL, UPLOAD_PRESET } from '../secrets'
+import { CLOUD_NAME, IMAGE_UPLOAD_URL, UPLOAD_PRESET } from '../../secrets'
 
 const SignUpForm = () => {
   const [show, setShow] = useState(false)

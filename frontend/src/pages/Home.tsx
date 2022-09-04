@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { useEffect } from 'react'
 import {
   Box,
   Container,
@@ -9,10 +9,25 @@ import {
   Tabs,
   Text,
 } from '@chakra-ui/react'
-import LoginForm from '../components/LoginForm'
-import SignUpForm from '../components/SignUpForm'
+import { useHistory } from 'react-router-dom'
+import LoginForm from '../components/auth/LoginForm'
+import SignUpForm from '../components/auth/SignUpForm'
 
 export const Home = () => {
+  const history = useHistory()
+
+  /**
+   * Checks if the user is currently in the localStorage
+   * then push him/her into the chat page
+   */
+  useEffect(() => {
+    const userInfo = JSON.parse(localStorage.getItem('userInfo')!)
+
+    if (!userInfo) {
+      history.push('/')
+    }
+  }, [])
+
   return (
     <Container maxW='xl' centerContent>
       <Box
