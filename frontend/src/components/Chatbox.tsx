@@ -2,6 +2,7 @@ import { Box } from '@chakra-ui/layout'
 import './styles.css'
 import SingleChat from './SingleChat'
 import React from 'react'
+import { ChatState } from '../context/chatProvider'
 
 const Chatbox = ({ fetchAgain, setFetchAgain }) => {
   const { selectedChat } = ChatState()
@@ -22,6 +23,3 @@ const Chatbox = ({ fetchAgain, setFetchAgain }) => {
 }
 
 export default Chatbox
-function ChatState(): { selectedChat: any } {
-  throw new Error('Function not implemented.')
-}

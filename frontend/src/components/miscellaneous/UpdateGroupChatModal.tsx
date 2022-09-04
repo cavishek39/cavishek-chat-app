@@ -1,4 +1,4 @@
-import { ViewIcon } from "@chakra-ui/icons";
+import { ViewIcon } from '@chakra-ui/icons'
 import {
   Modal,
   ModalOverlay,
@@ -15,64 +15,66 @@ import {
   Box,
   IconButton,
   Spinner,
-} from "@chakra-ui/react";
-import axios from "axios";
-import { useState } from "react";
-import { ChatState } from "../../Context/ChatProvider";
-import UserBadgeItem from "../userAvatar/UserBadgeItem";
-import UserListItem from "../userAvatar/UserListItem";
+} from '@chakra-ui/react'
+import axios from 'axios'
+import React from 'react'
+import { useState } from 'react'
+import { ChatState } from '../../context/chatProvider'
+import { User } from '../../types/user'
+import UserBadgeItem from '../userAvatar/UserBadgeItem'
+import UserListItem from '../userAvatar/UserListItem'
 
 const UpdateGroupChatModal = ({ fetchMessages, fetchAgain, setFetchAgain }) => {
-  const { isOpen, onOpen, onClose } = useDisclosure();
-  const [groupChatName, setGroupChatName] = useState();
-  const [search, setSearch] = useState("");
-  const [searchResult, setSearchResult] = useState([]);
-  const [loading, setLoading] = useState(false);
-  const [renameloading, setRenameLoading] = useState(false);
-  const toast = useToast();
+  const { isOpen, onOpen, onClose } = useDisclosure()
+  const [groupChatName, setGroupChatName] = useState<string>('')
+  const [search, setSearch] = useState('')
+  const [searchResult, setSearchResult] = useState<User[]>([])
+  const [loading, setLoading] = useState(false)
+  const [renameloading, setRenameLoading] = useState(false)
+  const toast = useToast()
 
-  const { selectedChat, setSelectedChat, user } = ChatState();
+  const { selectedChat, setSelectedChat, user } = ChatState()
 
   const handleSearch = async (query) => {
-    setSearch(query);
+    setSearch(query)
     if (!query) {
-      return;
+      return
     }
 
     try {
-      setLoading(true);
+      setLoading(true)
       const config = {
         headers: {
           Authorization: `Bearer ${user.token}`,
         },
-      };
-      const { data } = await axios.get(`/api/user?search=${search}`, config);
-      console.log(data);
-      setLoading(false);
-      setSearchResult(data);
+      }
+      const { data } = await axios.get(`/api/user?search=${search}`, config)
+      console.log(data)
+      setLoading(false)
+      setSearchResult(data)
     } catch (error) {
       toast({
-        title: "Error Occured!",
-        description: "Failed to Load the Search Results",
-        status: "error",
+        title: 'Error Occured!',
+        description: 'Failed to Load the Search Results',
+        status: 'error',
         duration: 5000,
         isClosable: true,
-        position: "bottom-left",
-      });
-      setLoading(false);
+        position: 'bottom-left',
+      })
+      setLoading(false)
     }
-  };
+  }
 
   const handleRename = async () => {
-    if (!groupChatName) return;
+    if (!groupChatName) return
 
     try {
-      setRenameLoading(true);
+      setRenameLoading(true)
       const config = {
         headers: {
           Authorization: `Bearer ${user.token}`,
         },
-      };
+      }
       const { data } = await axios.put(
         `/api/chat/rename`,
         {
@@ -80,57 +82,57 @@ const UpdateGroupChatModal = ({ fetchMessages, fetchAgain, setFetchAgain }) => {
           chatName: groupChatName,
         },
         config
-      );
+      )
 
-      console.log(data._id);
+      console.log(data._id)
       // setSelectedChat("");
-      setSelectedChat(data);
-      setFetchAgain(!fetchAgain);
-      setRenameLoading(false);
+      setSelectedChat(data)
+      setFetchAgain(!fetchAgain)
+      setRenameLoading(false)
     } catch (error) {
       toast({
-        title: "Error Occured!",
+        title: 'Error Occured!',
         description: error.response.data.message,
-        status: "error",
+        status: 'error',
         duration: 5000,
         isClosable: true,
-        position: "bottom",
-      });
-      setRenameLoading(false);
+        position: 'bottom',
+      })
+      setRenameLoading(false)
     }
-    setGroupChatName("");
-  };
+    setGroupChatName('')
+  }
 
   const handleAddUser = async (user1) => {
     if (selectedChat.users.find((u) => u._id === user1._id)) {
       toast({
-        title: "User Already in group!",
-        status: "error",
+        title: 'User Already in group!',
+        status: 'error',
         duration: 5000,
         isClosable: true,
-        position: "bottom",
-      });
-      return;
+        position: 'bottom',
+      })
+      return
     }
 
     if (selectedChat.groupAdmin._id !== user._id) {
       toast({
-        title: "Only admins can add someone!",
-        status: "error",
+        title: 'Only admins can add someone!',
+        status: 'error',
         duration: 5000,
         isClosable: true,
-        position: "bottom",
-      });
-      return;
+        position: 'bottom',
+      })
+      return
     }
 
     try {
-      setLoading(true);
+      setLoading(true)
       const config = {
         headers: {
           Authorization: `Bearer ${user.token}`,
         },
-      };
+      }
       const { data } = await axios.put(
         `/api/chat/groupadd`,
         {
@@ -138,44 +140,44 @@ const UpdateGroupChatModal = ({ fetchMessages, fetchAgain, setFetchAgain }) => {
           userId: user1._id,
         },
         config
-      );
+      )
 
-      setSelectedChat(data);
-      setFetchAgain(!fetchAgain);
-      setLoading(false);
+      setSelectedChat(data)
+      setFetchAgain(!fetchAgain)
+      setLoading(false)
     } catch (error) {
       toast({
-        title: "Error Occured!",
+        title: 'Error Occured!',
         description: error.response.data.message,
-        status: "error",
+        status: 'error',
         duration: 5000,
         isClosable: true,
-        position: "bottom",
-      });
-      setLoading(false);
+        position: 'bottom',
+      })
+      setLoading(false)
     }
-    setGroupChatName("");
-  };
+    setGroupChatName('')
+  }
 
   const handleRemove = async (user1) => {
     if (selectedChat.groupAdmin._id !== user._id && user1._id !== user._id) {
       toast({
-        title: "Only admins can remove someone!",
-        status: "error",
+        title: 'Only admins can remove someone!',
+        status: 'error',
         duration: 5000,
         isClosable: true,
-        position: "bottom",
-      });
-      return;
+        position: 'bottom',
+      })
+      return
     }
 
     try {
-      setLoading(true);
+      setLoading(true)
       const config = {
         headers: {
           Authorization: `Bearer ${user.token}`,
         },
-      };
+      }
       const { data } = await axios.put(
         `/api/chat/groupremove`,
         {
@@ -183,45 +185,51 @@ const UpdateGroupChatModal = ({ fetchMessages, fetchAgain, setFetchAgain }) => {
           userId: user1._id,
         },
         config
-      );
+      )
 
-      user1._id === user._id ? setSelectedChat() : setSelectedChat(data);
-      setFetchAgain(!fetchAgain);
-      fetchMessages();
-      setLoading(false);
+      user1._id === user._id
+        ? setSelectedChat(undefined)
+        : setSelectedChat(data)
+      setFetchAgain(!fetchAgain)
+      fetchMessages()
+      setLoading(false)
     } catch (error) {
       toast({
-        title: "Error Occured!",
+        title: 'Error Occured!',
         description: error.response.data.message,
-        status: "error",
+        status: 'error',
         duration: 5000,
         isClosable: true,
-        position: "bottom",
-      });
-      setLoading(false);
+        position: 'bottom',
+      })
+      setLoading(false)
     }
-    setGroupChatName("");
-  };
+    setGroupChatName('')
+  }
 
   return (
     <>
-      <IconButton d={{ base: "flex" }} icon={<ViewIcon />} onClick={onOpen} />
+      <IconButton
+        display={{ base: 'flex' }}
+        icon={<ViewIcon />}
+        onClick={onOpen}
+        aria-label={''}
+      />
 
       <Modal onClose={onClose} isOpen={isOpen} isCentered>
         <ModalOverlay />
         <ModalContent>
           <ModalHeader
-            fontSize="35px"
-            fontFamily="Work sans"
-            d="flex"
-            justifyContent="center"
-          >
+            fontSize='35px'
+            fontFamily='Work sans'
+            display='flex'
+            justifyContent='center'>
             {selectedChat.chatName}
           </ModalHeader>
 
           <ModalCloseButton />
-          <ModalBody d="flex" flexDir="column" alignItems="center">
-            <Box w="100%" d="flex" flexWrap="wrap" pb={3}>
+          <ModalBody display='flex' flexDir='column' alignItems='center'>
+            <Box w='100%' display='flex' flexWrap='wrap' pb={3}>
               {selectedChat.users.map((u) => (
                 <UserBadgeItem
                   key={u._id}
@@ -231,33 +239,32 @@ const UpdateGroupChatModal = ({ fetchMessages, fetchAgain, setFetchAgain }) => {
                 />
               ))}
             </Box>
-            <FormControl d="flex">
+            <FormControl display='flex'>
               <Input
-                placeholder="Chat Name"
+                placeholder='Chat Name'
                 mb={3}
                 value={groupChatName}
                 onChange={(e) => setGroupChatName(e.target.value)}
               />
               <Button
-                variant="solid"
-                colorScheme="teal"
+                variant='solid'
+                colorScheme='teal'
                 ml={1}
                 isLoading={renameloading}
-                onClick={handleRename}
-              >
+                onClick={handleRename}>
                 Update
               </Button>
             </FormControl>
             <FormControl>
               <Input
-                placeholder="Add User to group"
+                placeholder='Add User to group'
                 mb={1}
                 onChange={(e) => handleSearch(e.target.value)}
               />
             </FormControl>
 
             {loading ? (
-              <Spinner size="lg" />
+              <Spinner size='lg' />
             ) : (
               searchResult?.map((user) => (
                 <UserListItem
@@ -269,14 +276,14 @@ const UpdateGroupChatModal = ({ fetchMessages, fetchAgain, setFetchAgain }) => {
             )}
           </ModalBody>
           <ModalFooter>
-            <Button onClick={() => handleRemove(user)} colorScheme="red">
+            <Button onClick={() => handleRemove(user)} colorScheme='red'>
               Leave Group
             </Button>
           </ModalFooter>
         </ModalContent>
       </Modal>
     </>
-  );
-};
+  )
+}
 
-export default UpdateGroupChatModal;
+export default UpdateGroupChatModal
