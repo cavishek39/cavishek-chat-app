@@ -37,4 +37,17 @@ const sendMessage = asyncHandler(async (req, res) => {
   }
 })
 
-module.exports = { sendMessage }
+const allMessages = asyncHandler(async (req, res) => {
+  // console.log('Chat id ', req.params.chatId)
+  try {
+    const messages = await Message.find({ chat: req.params.chatId })
+      .populate('sender', 'name profileAvatar email')
+      .populate('chat')
+
+    res.status(200).json(messages)
+  } catch (err) {
+    res.status(400)
+    throw new Error(error.message)
+  }
+})
+module.exports = { sendMessage, allMessages }
