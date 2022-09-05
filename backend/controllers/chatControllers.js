@@ -7,6 +7,7 @@ const User = require('../models/user')
 //@access          Protected
 const accessChat = asyncHandler(async (req, res) => {
   const { userId } = req.body
+  // console.log('UserId ', userId)
 
   if (!userId) {
     console.log('UserId param not sent with request')
@@ -79,7 +80,7 @@ const fetchChats = asyncHandler(async (req, res) => {
 //@access          Protected
 const createGroupChat = asyncHandler(async (req, res) => {
   if (!req.body.users || !req.body.name) {
-    return res.status(400).send({ message: 'Please Fill all the feilds' })
+    return res.status(400).send({ message: 'Please Fill all the fields' })
   }
 
   var users = JSON.parse(req.body.users)
@@ -138,7 +139,7 @@ const renameGroup = asyncHandler(async (req, res) => {
 })
 
 // @desc    Remove user from Group
-// @route   PUT /api/chat/groupremove
+// @route   PUT /api/chat/group remove
 // @access  Protected
 const removeFromGroup = asyncHandler(async (req, res) => {
   const { chatId, userId } = req.body
