@@ -26,7 +26,7 @@ export const Home = () => {
     if (!userInfo) {
       history.push('/')
     }
-  }, [])
+  }, [history])
 
   return (
     <Container maxW='xl' centerContent>
