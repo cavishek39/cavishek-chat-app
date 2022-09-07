@@ -69,4 +69,13 @@ io.on('connection', (socket) => {
       socket.in(user._id).emit('message received', newMessageReceived)
     })
   })
+
+  socket.on('typing', (room) => socket.in(room).emit('typing'))
+
+  socket.on('stop typing', (room) => socket.in(room).emit('stop typing'))
+
+  socket.off('setup', () => {
+    console.log('USER DISCONNECTED')
+    socket.leave(userData._id)
+  })
 })

@@ -16,11 +16,13 @@ import io from 'socket.io-client'
 import UpdateGroupChatModal from './miscellaneous/UpdateGroupChatModal'
 import { ChatState } from '../context/chatProvider'
 import React from 'react'
+import { Message } from '../types/message'
+import { EVENT } from '../types/event'
 const ENDPOINT = 'http://localhost:5001' // "https://groupper.com"; -> After deployment
 var socket, selectedChatCompare
 
 const SingleChat = ({ fetchAgain, setFetchAgain }) => {
-  const [messages, setMessages] = useState([])
+  const [messages, setMessages] = useState<Message[]>([])
   const [loading, setLoading] = useState(false)
   const [newMessage, setNewMessage] = useState('')
   const [socketConnected, setSocketConnected] = useState(false)
@@ -107,10 +109,10 @@ const SingleChat = ({ fetchAgain, setFetchAgain }) => {
 
   useEffect(() => {
     socket = io(ENDPOINT)
-    socket.emit('setup', user)
-    socket.on('connected', () => setSocketConnected(true))
-    socket.on('typing', () => setIsTyping(true))
-    socket.on('stop typing', () => setIsTyping(false))
+    socket.emit(EVENT.SETUP, user)
+    socket.on(EVENT.CONNECTED, () => setSocketConnected(true))
+    socket.on(EVENT.TYPING, () => setIsTyping(true))
+    socket.on(EVENT.STOP_TYPING, () => setIsTyping(false))
 
     // eslint-disable-next-line
   }, [])
@@ -123,17 +125,18 @@ const SingleChat = ({ fetchAgain, setFetchAgain }) => {
   }, [selectedChat])
 
   useEffect(() => {
-    socket.on('message recieved', (newMessageRecieved) => {
+    socket.on(EVENT.MESSAGE_RECEIVED, (newMessageReceived: Message) => {
+      // if chat is not selected or doesn't match current chat
       if (
-        !selectedChatCompare || // if chat is not selected or doesn't match current chat
-        selectedChatCompare._id !== newMessageRecieved.chat._id
+        !selectedChatCompare ||
+        selectedChatCompare._id !== newMessageReceived.chat._id
       ) {
-        if (!notification.includes(newMessageRecieved)) {
-          setNotification([newMessageRecieved, ...notification])
+        if (!notification.includes(newMessageReceived)) {
+          setNotification([newMessageReceived, ...notification])
           setFetchAgain(!fetchAgain)
         }
       } else {
-        setMessages([...messages, newMessageRecieved])
+        setMessages([...messages, newMessageReceived])
       }
     })
   })
@@ -176,7 +179,7 @@ const SingleChat = ({ fetchAgain, setFetchAgain }) => {
               display={{ base: 'flex', md: 'none' }}
               icon={<ArrowBackIcon />}
               onClick={() => setSelectedChat(undefined)}
-              // aria-label={''}
+              aria-label={'icon-button'}
             />
             {messages &&
               (!selectedChat.isGroupChat ? (
