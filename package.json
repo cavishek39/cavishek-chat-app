@@ -4,7 +4,8 @@
   "description": "A 1-2-1 chat application",
   "main": "index.js",
   "scripts": {
-    "start": "nodemon backend/index.js"
+    "start": "nodemon backend/index.js",
+    "build": "cd /frontend && react-scripts build"
   },
   "repository": {
     "type": "git",
