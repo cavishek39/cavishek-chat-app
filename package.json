@@ -1,0 +1,19 @@
+{
+  "name": "cavishek-chat-app",
+  "version": "1.0.0",
+  "description": "A 1-2-1 chat application",
+  "main": "index.js",
+  "scripts": {
+    "start": "nodemon backend/index.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/cavishek39/cavishek-chat-app.git"
+  },
+  "author": "Avishek Chatterjee",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/cavishek39/cavishek-chat-app/issues"
+  },
+  "homepage": "https://github.com/cavishek39/cavishek-chat-app#readme"
+}

@@ -5,6 +5,7 @@ const connectDB = require('./config/db')
 const userRoutes = require('./routes/userRoutes')
 const chatRoutes = require('./routes/chatRoutes')
 const messageRoutes = require('./routes/messageRoutes')
+const path = require('path')
 
 const { errorHandler, notFound } = require('./middleware/errorHandling')
 dotenv.config()
@@ -13,10 +14,6 @@ const app = express()
 app.use(express.json())
 
 const PORT = process.env.PORT || 5000
-
-app.get('/', (req, res) => {
-  res.send(chats)
-})
 
 app.get('/api/chats', (req, res) => {
   res.send(chats)
@@ -31,6 +28,20 @@ app.get('/api/chats/:id', (req, res) => {
 app.use('/api/user', userRoutes)
 app.use('/api/chat', chatRoutes)
 app.use('/api/message', messageRoutes)
+
+// -----------------------DEPLOYMENT-----------------------------------------
+const __dirname1 = path.resolve()
+if (process.env.NODE_ENV === 'production') {
+  app.use(express.static(path.join(__dirname1, '/frontend/build')))
+
+  app.get('*', (req, res) => {
+    res.sendFile(path.resolve(__dirname1, 'frontend', 'build', 'index.html'))
+  })
+} else {
+  app.get('/', (req, res) => {
+    res.send('Api running successfully')
+  })
+}
 
 app.use(notFound)
 app.use(errorHandler)
