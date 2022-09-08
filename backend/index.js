@@ -12,6 +12,8 @@ dotenv.config()
 connectDB()
 const app = express()
 app.use(express.json())
+const helmet = require('helmet')
+app.use(helmet())
 
 const PORT = process.env.PORT || 5000
 

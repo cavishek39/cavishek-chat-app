@@ -18,7 +18,7 @@ import { ChatState } from '../context/chatProvider'
 import React from 'react'
 import { Message } from '../types/message'
 import { EVENT } from '../types/event'
-const ENDPOINT = 'https://groupper.netlify.app/' // "https://groupper.com"; -> After deployment
+const ENDPOINT = 'http://localhost:5001' // "https://groupper.com"; -> After deployment
 var socket, selectedChatCompare
 
 const SingleChat = ({ fetchAgain, setFetchAgain }) => {
