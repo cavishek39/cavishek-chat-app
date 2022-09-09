@@ -11,9 +11,10 @@ Uses Socket.io for real time communication and stores user details in encrypted 
 
 **Database:** Mongo DB
   
-<!-- ## Demo
+## Demo
+NOTE: This is the frontend only deployment, I'm working on the pipeline to deploy the Full-Stack application
 
-https://talk-a-tive.herokuapp.com/ -->
+https://groupper.netlify.app/
 
 ![image](https://user-images.githubusercontent.com/71460522/189274136-059ab98f-57c9-44e0-a304-5810dbffcabb.png)
 
