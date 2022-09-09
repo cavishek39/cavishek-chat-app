@@ -130,7 +130,7 @@ function SideDrawer() {
         display='flex'
         justifyContent='space-between'
         alignItems='center'
-        bg='white'
+        bg='whitesmoke'
         w='100%'
         p='5px 10px 5px 10px'
         borderWidth='5px'>

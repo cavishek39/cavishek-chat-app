@@ -38,7 +38,8 @@ export const Home = () => {
         w='100%'
         m='40px 0 15px 0'
         borderRadius='lg'
-        borderWidth='1px'>
+        borderWidth='1px'
+        backgroundColor={'gray.300'}>
         <Text fontSize='4xl' fontFamily='monospace'>
           Groupper
         </Text>
