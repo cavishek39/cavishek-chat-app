@@ -1,7 +1,7 @@
 
-# cavishek-chat-app
+# Groupper
 
-cavishek-chat-app is a Full Stack 1-2-1 as well as group Chatting Application.
+Groupper is a Full Stack 1-2-1 as well as group Chatting Application.
 Uses Socket.io for real time communication and stores user details in encrypted format in Mongo DB Database.
 ## Tech Stack
 
@@ -15,7 +15,8 @@ Uses Socket.io for real time communication and stores user details in encrypted 
 
 https://talk-a-tive.herokuapp.com/ -->
 
-<!-- ![](https://github.com/piyush-eon/mern-chat-app/blob/master/screenshots/group%20%2B%20notif.PNG) -->
+![image](https://user-images.githubusercontent.com/71460522/189274136-059ab98f-57c9-44e0-a304-5810dbffcabb.png)
+
 ## Run Locally
 
 Clone the project
@@ -55,27 +56,36 @@ Start the Client
 ```
 
   
-<!-- # Features
+ # Features
 
 ### Authenticaton
-![](https://github.com/piyush-eon/mern-chat-app/blob/master/screenshots/login.PNG)
-![](https://github.com/piyush-eon/mern-chat-app/blob/master/screenshots/signup.PNG)
+![image](https://user-images.githubusercontent.com/71460522/189274321-aa6c310f-d97d-4e7d-8402-66b8f4fbe4d9.png)
+![image](https://user-images.githubusercontent.com/71460522/189274597-371eaa7f-6c71-4289-9cb4-2b3db0a0f492.png)
 ### Real Time Chatting with Typing indicators
-![](https://github.com/piyush-eon/mern-chat-app/blob/master/screenshots/real-time.PNG)
+![image](https://user-images.githubusercontent.com/71460522/189275269-07c6454c-977f-4181-bab9-5751abcbd110.png)
+
 ### One to One chat
-![](https://github.com/piyush-eon/mern-chat-app/blob/master/screenshots/mainscreen.PNG)
+![image](https://user-images.githubusercontent.com/71460522/189275253-308f9c25-b5ad-4bab-bf78-20d861cc4ac7.png)
+![image](https://user-images.githubusercontent.com/71460522/189275466-9a09691d-ec3a-4ec0-ae30-8a48ef084d43.png)
+
 ### Search Users
-![](https://github.com/piyush-eon/mern-chat-app/blob/master/screenshots/search.PNG)
+![image](https://user-images.githubusercontent.com/71460522/189275366-a46dc02a-631e-4560-9d1f-8c8ccb810193.png)
+
 ### Create Group Chats
-![](https://github.com/piyush-eon/mern-chat-app/blob/master/screenshots/new%20grp.PNG)
+![image](https://user-images.githubusercontent.com/71460522/189275253-308f9c25-b5ad-4bab-bf78-20d861cc4ac7.png)
+![image](https://user-images.githubusercontent.com/71460522/189275590-a9066230-11d5-46c7-8842-7304d13cfacb.png)
+
 ### Notifications 
-![](https://github.com/piyush-eon/mern-chat-app/blob/master/screenshots/group%20%2B%20notif.PNG)
+
 ### Add or Remove users from group
-![](https://github.com/piyush-eon/mern-chat-app/blob/master/screenshots/add%20rem.PNG)
+![image](https://user-images.githubusercontent.com/71460522/189275539-4fce1df3-9148-4503-931f-372de70e367b.png)
+![image](https://user-images.githubusercontent.com/71460522/189275594-a3d4dfe7-9169-4996-8ffd-d507667833ed.png)
+
 ### View Other user Profile
-![](https://github.com/piyush-eon/mern-chat-app/blob/master/screenshots/profile.PNG)
+![image](https://user-images.githubusercontent.com/71460522/189275646-5f0f2a34-3822-447a-97f6-b280c79d8a82.png)
+
 ## Made By
 
-- [@Piyush-eon](https://github.com/piyush-eon) -->
+- [@cavishek39](https://github.com/cavishek39)
 
   
