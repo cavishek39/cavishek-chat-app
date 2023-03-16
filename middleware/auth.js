@@ -1,0 +1,36 @@
+const jwt = require('jsonwebtoken')
+const User = require('../models/user')
+const asyncHandler = require('express-async-handler')
+require('dotenv').config()
+
+const protect = asyncHandler(async (req, res, next) => {
+  let token
+
+  if (
+    req.headers.authorization &&
+    req.headers.authorization.startsWith('Bearer')
+  ) {
+    try {
+      token = req.headers.authorization.split(' ')[1]
+      // console.log('Bearer_Token ', token)
+
+      //decodes token id
+      const decoded = jwt.verify(token, process.env.JWT_TOKEN)
+
+      // TODO: Refactor this
+      req.user = await User.findById(decoded.id).select('-password')
+
+      next()
+    } catch (error) {
+      res.status(401)
+      throw new Error('Not authorized, token failed')
+    }
+  }
+
+  if (!token) {
+    res.status(401)
+    throw new Error('Not authorized, no token')
+  }
+})
+
+module.exports = { protect }
