@@ -16,5 +16,6 @@
   "bugs": {
     "url": "https://github.com/cavishek39/cavishek-chat-app/issues"
   },
-  "homepage": "https://github.com/cavishek39/cavishek-chat-app#readme"
+  "homepage": "https://github.com/cavishek39/cavishek-chat-app#readme",
+  "dependencies": {}
 }

@@ -84,9 +84,9 @@ const MyChats = ({ fetchAgain }) => {
         h='100%'
         borderRadius='lg'
         overflowY='hidden'>
-        {chats ? (
+        {chats?.length > 0 ? (
           <Stack overflowY='scroll'>
-            {chats.map((chat) => (
+            {chats?.map((chat) => (
               <Box
                 onClick={() => setSelectedChat(chat)}
                 cursor='pointer'

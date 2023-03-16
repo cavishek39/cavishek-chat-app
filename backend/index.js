@@ -17,6 +17,15 @@ app.use(helmet())
 
 const PORT = process.env.PORT || 5000
 
+// serving the frontend
+app.use(express.static(path.join(__dirname, '../frontend/build')))
+
+app.get('*', (_, res) => {
+  res.sendFile(path.join(__dirname, '../frontend/build/index.html'), (err) => {
+    res.status(500).send(err)
+  })
+})
+
 app.get('/api/chats', (req, res) => {
   res.send(chats)
 })
@@ -55,7 +64,7 @@ const server = app.listen(PORT, () =>
 const io = require('socket.io')(server, {
   pingTimeout: 60000,
   cors: {
-    origin: 'http://localhost:3000',
+    origin: 'http://127.0.0.1:5001',
     // credentials: true,
   },
 })
