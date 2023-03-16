@@ -4,8 +4,7 @@
   "description": "A fun place to chat 1-2-1 or group chat",
   "main": "index.js",
   "scripts": {
-    "start": "node index.js",
-    "build": "cd frontend/ && npm run build"
+    "start": "node index.js"
   },
   "repository": {
     "type": "git",
