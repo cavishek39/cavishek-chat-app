@@ -1,6 +1,6 @@
 {
-  "name": "groupper",
-  "version": "1.0.1",
+  "name": "cavishek-chat-app",
+  "version": "1.0.0",
   "description": "A fun place to chat 1-2-1 or group chat",
   "main": "index.js",
   "scripts": {
@@ -11,7 +11,7 @@
     "url": "git+https://github.com/cavishek39/cavishek-chat-app.git"
   },
   "author": "Avishek Chatterjee",
-  "license": "MIT",
+  "license": "ISC",
   "dependencies": {
     "bcryptjs": "^2.4.3",
     "dotenv": "^16.0.3",
