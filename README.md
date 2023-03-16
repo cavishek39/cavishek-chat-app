@@ -10,6 +10,8 @@ Uses Socket.io for real time communication and stores user details in encrypted 
 **Server:** Node JS, Express JS
 
 **Database:** Mongo DB
+
+**CI/CD:** Cyclic.sh
   
 ## Demo
 NOTE: This is the frontend only deployment, I'm working on the pipeline to deploy the Full-Stack application
