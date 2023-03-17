@@ -2,9 +2,9 @@
   "name": "cavishek-chat-app",
   "version": "1.0.0",
   "description": "A fun place to chat 1-2-1 or group chat",
-  "main": "index.js",
+  "main": "server.js",
   "scripts": {
-    "start": "node index.js"
+    "start": "node server.js"
   },
   "repository": {
     "type": "git",
