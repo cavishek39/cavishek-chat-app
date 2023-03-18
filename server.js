@@ -6,7 +6,6 @@ const userRoutes = require('./routes/userRoutes')
 const chatRoutes = require('./routes/chatRoutes')
 const messageRoutes = require('./routes/messageRoutes')
 const path = require('path')
-const router = express.Router()
 
 const { errorHandler, notFound } = require('./middleware/errorHandling')
 dotenv.config()
@@ -15,14 +14,7 @@ const app = express()
 app.use(express.json())
 const helmet = require('helmet')
 app.use(helmet())
-router.use((request, response, next) => {
-  response.header('Access-Control-Allow-Origin', '*')
-  response.header(
-    'Access-Control-Allow-Methods: GET, POST, PATCH, PUT, DELETE, OPTIONS'
-  )
-  response.header('Access-Control-Allow-Headers', 'Content-Type')
-  next()
-})
+
 const PORT = process.env.PORT || 5000
 
 app.use('/api/user', userRoutes)
