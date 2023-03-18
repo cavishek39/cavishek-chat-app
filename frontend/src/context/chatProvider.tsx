@@ -30,7 +30,7 @@ const ChatContext = createContext<ChatContextArgs>(sampleChatContext)
 
 const ChatProvider = ({ children }) => {
   const history = useHistory()
-  const [user, setUser] = useState<User | undefined>()
+  const [user, setUser] = useState<User>()
   const [notification, setNotification] = useState<any>([])
   const [chats, setChats] = useState<Chat[] | undefined>([])
   const [selectedChat, setSelectedChat] = useState<Chat | undefined>()

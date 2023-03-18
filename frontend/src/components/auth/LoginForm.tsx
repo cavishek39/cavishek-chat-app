@@ -6,6 +6,8 @@ import { VStack } from '@chakra-ui/layout'
 import axios from 'axios'
 import { useToast } from '@chakra-ui/react'
 import { useHistory } from 'react-router-dom'
+import { User } from '../../types/user'
+import { ChatState } from '../../context/chatProvider'
 
 const LoginForm = () => {
   const [show, setShow] = useState<boolean>(false)
@@ -16,6 +18,7 @@ const LoginForm = () => {
   const [loading, setLoading] = useState<boolean>(false)
 
   const history = useHistory()
+  const { setUser } = ChatState()
 
   const submitHandler = async () => {
     setLoading(true)
@@ -39,23 +42,26 @@ const LoginForm = () => {
         },
       }
 
-      const { data } = await axios.post(
+      const { data } = await axios.post<User>(
         '/api/user/login',
         { email, password },
         config
       )
 
-      // console.log(JSON.stringify(data));
-      toast({
-        title: 'Login Successful',
-        status: 'success',
-        duration: 5000,
-        isClosable: true,
-        position: 'bottom',
-      })
-      localStorage.setItem('userInfo', JSON.stringify(data))
-      setLoading(false)
-      history.push('/chats')
+      // console.log('Data coming from server ', data)
+      if (!!data?._id) {
+        setLoading(false)
+        setUser(data)
+        history.push('/chats')
+        localStorage.setItem('userInfo', JSON.stringify(data))
+        toast({
+          title: 'Login Successful',
+          status: 'success',
+          duration: 5000,
+          isClosable: true,
+          position: 'bottom',
+        })
+      }
     } catch (error) {
       toast({
         title: 'Error Occured!',
@@ -71,7 +77,7 @@ const LoginForm = () => {
 
   return (
     <VStack spacing='10px'>
-      <FormControl id='email' isRequired>
+      <FormControl key='email_field' id='email' isRequired>
         <FormLabel>Email Address</FormLabel>
         <Input
           value={email}
@@ -80,7 +86,7 @@ const LoginForm = () => {
           onChange={(e) => setEmail(e.target.value)}
         />
       </FormControl>
-      <FormControl id='password' isRequired>
+      <FormControl key='password_field' id='password_field' isRequired>
         <FormLabel>Password</FormLabel>
         <InputGroup size='md'>
           <Input

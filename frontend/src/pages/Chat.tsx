@@ -11,15 +11,15 @@ export const Chat = () => {
 
   return (
     <div style={{ width: '100%' }}>
-      {user && <SideDrawer />}
+      {!!user?._id && <SideDrawer />}
       <Box
         display='flex'
         justifyContent='space-between'
         w='100%'
         h='91.5vh'
         p='10px'>
-        {user && <MyChats fetchAgain={fetchAgain} />}
-        {user && (
+        {!!user?._id && <MyChats fetchAgain={fetchAgain} />}
+        {!!user?._id && (
           <Chatbox fetchAgain={fetchAgain} setFetchAgain={setFetchAgain} />
         )}
       </Box>

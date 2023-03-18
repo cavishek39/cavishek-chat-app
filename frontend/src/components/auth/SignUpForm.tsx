@@ -141,7 +141,7 @@ const SignUpForm = () => {
 
   return (
     <VStack spacing='10px'>
-      <FormControl id='name' isRequired>
+      <FormControl id='name_field' isRequired>
         <FormLabel>Name</FormLabel>
         <Input
           value={name}
@@ -149,7 +149,7 @@ const SignUpForm = () => {
           onChange={onChangeName}
         />
       </FormControl>
-      <FormControl id='email' isRequired>
+      <FormControl id='email_field' isRequired>
         <FormLabel>Email Address</FormLabel>
         <Input
           value={email}
@@ -158,7 +158,7 @@ const SignUpForm = () => {
           onChange={onChangeEmail}
         />
       </FormControl>
-      <FormControl id='password' isRequired>
+      <FormControl id='password_field_sign_up' isRequired>
         <FormLabel>Password</FormLabel>
         <InputGroup size='md'>
           <Input
@@ -174,7 +174,7 @@ const SignUpForm = () => {
           </InputRightElement>
         </InputGroup>
       </FormControl>
-      <FormControl id='password' isRequired>
+      <FormControl id='confirm_password_field' isRequired>
         <FormLabel>Confirm Password</FormLabel>
         <InputGroup size='md'>
           <Input
@@ -190,7 +190,7 @@ const SignUpForm = () => {
           </InputRightElement>
         </InputGroup>
       </FormControl>
-      <FormControl id='pic'>
+      <FormControl id='pic_field'>
         <FormLabel>Upload your Picture</FormLabel>
         <Input
           type='file'
