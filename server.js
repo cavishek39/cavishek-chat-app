@@ -13,18 +13,13 @@ connectDB()
 const app = express()
 app.use(express.json())
 const helmet = require('helmet')
-app.use(helmet())
+// app.use(helmet())
 
 const PORT = process.env.PORT || 5000
 
-// // serving the frontend
-// app.use(express.static(path.join(__dirname, './frontend/build')))
-
-// app.get('*', (_, res) => {
-//   res.sendFile(path.join(__dirname, './frontend/build/index.html'), (err) => {
-//     res.status(500).send(err)
-//   })
-// })
+app.use('/api/user', userRoutes)
+app.use('/api/chat', chatRoutes)
+app.use('/api/message', messageRoutes)
 
 app.get('/api/chats', (req, res) => {
   res.send(chats)
@@ -35,11 +30,6 @@ app.get('/api/chats/:id', (req, res) => {
 
   res.send(oneToOneChatRoom)
 })
-
-app.use('/api/user', userRoutes)
-app.use('/api/chat', chatRoutes)
-app.use('/api/message', messageRoutes)
-
 // -----------------------DEPLOYMENT-----------------------------------------
 const __dirname1 = path.resolve()
 if (process.env.NODE_ENV === 'production') {
@@ -57,9 +47,7 @@ if (process.env.NODE_ENV === 'production') {
 app.use(notFound)
 app.use(errorHandler)
 
-const server = app.listen(PORT, () =>
-  console.log(`Server is running on port ${PORT}`)
-)
+app.listen(PORT, () => console.log(`Server is running on port ${PORT}`))
 
 /* const io = require('socket.io')(server, {
   pingTimeout: 60000,
