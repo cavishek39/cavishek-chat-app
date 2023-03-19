@@ -9,6 +9,7 @@ import GroupChatModal from './miscellaneous/GroupChatModal'
 import { Button } from '@chakra-ui/react'
 import { ChatState } from '../context/chatProvider'
 import React from 'react'
+import { BASE_URL } from '../constant/constant'
 
 const MyChats = ({ fetchAgain }) => {
   const [loggedUser, setLoggedUser] = useState()
@@ -26,11 +27,11 @@ const MyChats = ({ fetchAgain }) => {
         },
       }
 
-      const { data } = await axios.get('/api/chat', config)
+      const { data } = await axios.get(`${BASE_URL}/api/chat`, config)
       setChats(data)
     } catch (error) {
       toast({
-        title: 'Error Occured!',
+        title: 'Error Occurred!',
         description: 'Failed to Load the chats',
         status: 'error',
         duration: 5000,

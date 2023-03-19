@@ -18,6 +18,7 @@ import { ChatState } from '../context/chatProvider'
 import React from 'react'
 import { Message } from '../types/message'
 import { EVENT } from '../types/event'
+import { BASE_URL } from '../constant/constant'
 const ENDPOINT = 'https://groupper.cyclic.app/' // "https://groupper.com"; -> After deployment
 // var socket, selectedChatCompare
 
@@ -54,7 +55,7 @@ const SingleChat = ({ fetchAgain, setFetchAgain }) => {
       setLoading(true)
 
       const { data } = await axios.get(
-        `/api/message/${selectedChat._id}`,
+        `${BASE_URL}/api/message/${selectedChat._id}`,
         config
       )
       setMessages(data)
@@ -85,7 +86,7 @@ const SingleChat = ({ fetchAgain, setFetchAgain }) => {
         }
         setNewMessage('')
         const { data } = await axios.post(
-          '/api/message',
+          `${BASE_URL}/api/message`,
           {
             content: newMessage,
             chatId: selectedChat,

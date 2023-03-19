@@ -16,6 +16,7 @@ import {
 import axios from 'axios'
 import React from 'react'
 import { useState } from 'react'
+import { BASE_URL } from '../../constant/constant'
 import { ChatState } from '../../context/chatProvider'
 import { User } from '../../types/user'
 import UserBadgeItem from '../userAvatar/UserBadgeItem'
@@ -60,7 +61,10 @@ const GroupChatModal = ({ children }) => {
           Authorization: `Bearer ${user.token}`,
         },
       }
-      const { data } = await axios.get(`/api/user?search=${search}`, config)
+      const { data } = await axios.get(
+        `${BASE_URL}/api/user?search=${search}`,
+        config
+      )
       console.log(data)
       setLoading(false)
       setSearchResult(data)
@@ -99,7 +103,7 @@ const GroupChatModal = ({ children }) => {
         },
       }
       const { data } = await axios.post(
-        `/api/chat/group`,
+        `${BASE_URL}/api/chat/group`,
         {
           name: groupChatName,
           users: JSON.stringify(selectedUsers.map((u) => u._id)),

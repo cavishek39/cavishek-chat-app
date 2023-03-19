@@ -8,6 +8,7 @@ import { useToast } from '@chakra-ui/react'
 import { useHistory } from 'react-router-dom'
 import { User } from '../../types/user'
 import { ChatState } from '../../context/chatProvider'
+import { BASE_URL } from '../../constant/constant'
 
 const LoginForm = () => {
   const [show, setShow] = useState<boolean>(false)
@@ -43,7 +44,7 @@ const LoginForm = () => {
       }
 
       const { data } = await axios.post<User>(
-        '/api/user/login',
+        `${BASE_URL}/api/user/login`,
         { email, password },
         config
       )

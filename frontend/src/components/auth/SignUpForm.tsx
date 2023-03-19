@@ -7,6 +7,7 @@ import axios from 'axios'
 import { useToast } from '@chakra-ui/react'
 import { useHistory } from 'react-router-dom'
 import { CLOUD_NAME, IMAGE_UPLOAD_URL, UPLOAD_PRESET } from '../../secrets'
+import { BASE_URL } from '../../constant/constant'
 
 const SignUpForm = () => {
   const [show, setShow] = useState(false)
@@ -61,7 +62,7 @@ const SignUpForm = () => {
         },
       }
       const { data } = await axios.post(
-        '/api/user',
+        `${BASE_URL}/api/user`,
         {
           name,
           email,
