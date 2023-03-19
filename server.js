@@ -6,12 +6,20 @@ const userRoutes = require('./routes/userRoutes')
 const chatRoutes = require('./routes/chatRoutes')
 const messageRoutes = require('./routes/messageRoutes')
 const path = require('path')
+const cors = require('cors')
 
 const { errorHandler, notFound } = require('./middleware/errorHandling')
 dotenv.config()
 connectDB()
+
 const app = express()
 app.use(express.json())
+app.use(
+  cors({
+    methods: ['GET', 'POST', 'PUT', 'DELETE'],
+  })
+)
+
 const helmet = require('helmet')
 app.use(helmet())
 
